@@ -11,6 +11,7 @@ actually I haven't have an idea of how to transport the data from the front end 
 ### REAL END
 plan to use Go.
 
-1. because all the enermy have a red outline around them, I decide to find all this kind of red in the image ( hope there won't be too many in the model ).
-2. and find the center point for all the red pixels ( I hope I can do it without a lot of calculation ).
-3. return the point (x,y) to the front end.  
+- because all the enermy have a red outline around them, I decide to find all this kind of red in the image ( hope there won't be too many in the model ).
+- and find the center point for all the red pixels ( I hope I can do it without a lot of calculation ).
+- return the point (x,y) to the front end.  
+
