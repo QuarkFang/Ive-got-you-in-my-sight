@@ -5,12 +5,28 @@ package dotCalculation
 import (
 	"image"
 	"image/color"
+	"math"
 )
 
 func getDxDy(img *image.RGBA) (int, int) {
 	Dx := img.Bounds().Dx()
 	Dy := img.Bounds().Dy()
 	return Dx, Dy
+}
+
+func absRatio(num1, num2 uint32) float64 {
+	n1, n2 := int64(num1), int64(num2)
+	return math.Abs((float64(n1-n2) / float64(n1))) * 100
+}
+
+func isSamiliar(col1, col2 color.Color, ratio float64) bool {
+	R1, G1, B1, _ := col1.RGBA()
+	R2, G2, B2, _ := col2.RGBA()
+	ratioSum := absRatio(R1, R2) + absRatio(G1, G2) + absRatio(B1, B2)
+	if ratioSum < ratio*3 {
+		return true
+	}
+	return false
 }
 
 // LeaveColor : all the col in the img will be repalced with white
@@ -20,7 +36,8 @@ func LeaveColor(col color.Color, img *image.RGBA) {
 	Dx, Dy := getDxDy(img)
 	for x := 0; x < Dx; x++ {
 		for y := 0; y < Dy; y++ {
-			if img.At(x, y) != col {
+			if isSamiliar(img.At(x, y), col, 40) {
+				//fmt.Printf("%v  %v\n", img.At(x, y), col)
 				img.SetRGBA(x, y, color.RGBA{0, 0, 0, 255})
 			} else {
 				img.SetRGBA(x, y, color.RGBA{255, 255, 255, 255})
