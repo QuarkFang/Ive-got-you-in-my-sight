@@ -1,11 +1,18 @@
 package dotCalculation
 
-//I take care of no fucking error
+// I take care of no fucking error
+// fuck, just take care of it
+// I hate the fucking Golang
+
+/* TODO: after some test, maybe I should use some certain color
+   
+*/
 
 import (
 	"image"
 	"image/color"
 	"math"
+	"fmt"
 )
 
 func getDxDy(img *image.RGBA) (int, int) {
@@ -19,13 +26,19 @@ func absRatio(num1, num2 uint32) float64 {
 	return math.Abs((float64(n1-n2) / float64(n1))) * 100
 }
 
+// todo: isSamiliar algorithm can be perfected.
 func isSamiliar(col1, col2 color.Color, ratio float64) bool {
 	R1, G1, B1, _ := col1.RGBA()
 	R2, G2, B2, _ := col2.RGBA()
+	if absRatio(R1,R2) < ratio && absRatio(G1,G2)< ratio && absRatio(B1,B2)< ratio{
+		return true
+	}
+	/*
 	ratioSum := absRatio(R1, R2) + absRatio(G1, G2) + absRatio(B1, B2)
 	if ratioSum < ratio*3 {
 		return true
 	}
+	*/
 	return false
 }
 
@@ -46,7 +59,7 @@ func LeaveColor(col color.Color, img *image.RGBA) {
 	}
 }
 
-// CalcuGravityCenter : calcuGravityCenter of col in the image
+// CalcuGravityCenter : calcuGravityCenter of color(and its samiliar color) in the image
 func CalcuGravityCenter(col color.Color, img *image.RGBA) (int, int) {
 	Dx, Dy := getDxDy(img)
 	var sumX, sumY, sumNum int = 0, 0, 0
@@ -59,10 +72,10 @@ func CalcuGravityCenter(col color.Color, img *image.RGBA) (int, int) {
 			}
 		}
 	}
-	println(sumX / sumNum)
-	println(sumY / sumNum)
-
-	return sumX / sumNum, sumY / sumNum
+	centerX:=sumX/sumNum
+	centerY:=sumY/sumNum
+	fmt.Printf("The gravity center is (%d,%d)\n",centerX,centerY)
+	return centerX,centerY
 }
 
 func drawHorizontalLine(x1, y, x2 int, col color.Color, img *image.RGBA) {
@@ -82,15 +95,14 @@ func drawCross(x, y int, col color.Color, img *image.RGBA) {
 	drawHorizontalLine(x-10, y, x+10, col, img)
 	drawHorizontalLine(x-10, y+1, x+10, col, img)
 	drawHorizontalLine(x-10, y-1, x+10, col, img)
-
 	drawVerticalLine(x, y-10, y+10, col, img)
-
 	drawVerticalLine(x-1, y-10, y+10, col, img)
 	drawVerticalLine(x+1, y-10, y+10, col, img)
 }
 
 // DrawBlueMark : It draw a blue mark (0,0,255) at (x,y) in the RBGA image img)
 func DrawBlueMark(x, y int, img *(image.RGBA)) {
+	// FUCKING FAKE BLUE
 	blue := color.RGBA{0, 0, 0, 255}
 	drawCross(x, y, blue, img)
 }

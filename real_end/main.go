@@ -29,7 +29,7 @@ func main(){
 	draw.Draw(GCtestRGBA,bound,GCtest,bound.Min,draw.Src)
 	black:=color.RGBA{0,0,0,255}
 
-	col := color.RGBA{227,46,31,255}
+	col := color.RGBA{225,45,30,255}
 	//col := GCtestRGBA.At(715,805)
 	col2:=GCtestRGBA.At(0,0)
 	fmt.Printf("the target color is %v\n",col)
