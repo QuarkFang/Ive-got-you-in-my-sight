@@ -27,4 +27,11 @@ After the process, it looks like:
 Then we can aim:
 ![](./real_end/fuck3.png)
 
+## Update 3/14/2017
+red outline can be a huge problem. Let's look at my note
+![](./real_end/note1.jpg)
+![](./real_end/note2.jpg)
 
+The core of real end -- recognization of red outline can be perfect with a neuron-layer...
+
+Maybe I should do some basic imagine processions before I put it into the neuron-system. LET'S SEE.
